@@ -27,15 +27,14 @@ public class Task1 {
         }
 
         int testAge = age % 10;
-        String ageString = "";
         if (testAge == 1 && (age / 10) % 10 != 1) {
-            ageString = "Вам " + age + " год";
+            return "Вам " + age + " год";
         } else if (testAge >= 2 && testAge <= 4 && (age / 10) % 10 != 1) {
-            ageString = "Вам " + age + " года";
+            return "Вам " + age + " года";
         } else if (testAge >= 5 || testAge == 0 || (age / 10) % 10 == 1) {
-            ageString = "Вам " + age + " лет";
+            return "Вам " + age + " лет";
         }
 
-        return ageString;
+        return "";
     }
 }
