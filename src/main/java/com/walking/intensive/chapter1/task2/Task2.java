@@ -33,12 +33,66 @@ package com.walking.intensive.chapter1.task2;
  */
 public class Task2 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
+        int floorAmount = 3;
+        int entranceAmount = 2;
+        int flatNumber = 24;
+
+        System.out.println(getFlatLocation(floorAmount, entranceAmount, flatNumber));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        //        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        if ((floorAmount * 4 * entranceAmount) < flatNumber) {
+            return "Такой квартиры не существует";
+        }
+
+        if (flatNumber <= 0) {
+            return "Некорректные входные данные";
+        }
+
+        //определитель подъезда
+        int maxFlatInEntrance = floorAmount * 4;
+        int numEntrance; //номер подъезда
+        if ((flatNumber % maxFlatInEntrance) == 0) {
+            numEntrance = flatNumber / maxFlatInEntrance;
+        } else {
+            numEntrance = flatNumber / maxFlatInEntrance + 1;
+        }
+
+        //определитель этажа
+        int numFloor; //номер этажа
+        int endFlat = flatNumber - (numEntrance - 1) * maxFlatInEntrance;
+        if (endFlat == 0) {
+            if ((flatNumber % 4) == 0) {
+                numFloor = flatNumber / 4;
+            } else {
+                numFloor = flatNumber / 4 + 1;
+            }
+        } else {
+            if((endFlat % 4) == 0) {
+                numFloor = endFlat / 4;
+            } else {
+                numFloor = endFlat / 4 + 1;
+            }
+        }
+
+        // определитель положения
+        String locateOnFloor = "";
+        int maxNumFlatOnFloor = (numEntrance * maxFlatInEntrance) - ((floorAmount - numFloor) * 4);
+        if (maxNumFlatOnFloor == flatNumber) {
+            locateOnFloor = "справа от лифта, вправо";
+        }
+        if ((maxNumFlatOnFloor - 1) == flatNumber) {
+            locateOnFloor = "справа от лифта, влево";
+        }
+        if ((maxNumFlatOnFloor - 2) == flatNumber) {
+            locateOnFloor = "слева от лифта, вправо";
+        }
+        if ((maxNumFlatOnFloor - 3) == flatNumber) {
+            locateOnFloor = "слева от лифта, влево";
+        }
+
+        return flatNumber + " кв - " + numEntrance + " подъезд, " + numFloor + " этаж, " + locateOnFloor;
     }
 }
