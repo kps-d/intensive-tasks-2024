@@ -36,14 +36,16 @@ public class Task2 {
 
         int floorAmount = 3;
         int entranceAmount = 2;
-        int flatNumber = 24;
+        int flatNumber = 13;
 
         System.out.println(getFlatLocation(floorAmount, entranceAmount, flatNumber));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
 
-        if ((floorAmount * 4 * entranceAmount) < flatNumber) {
+        int flatsOnFloor = 4;
+
+        if ((floorAmount * flatsOnFloor * entranceAmount) < flatNumber) {
             return "Такой квартиры не существует";
         }
 
@@ -52,47 +54,40 @@ public class Task2 {
         }
 
         //определитель подъезда
-        int maxFlatInEntrance = floorAmount * 4;
-        int numEntrance; //номер подъезда
+        int maxFlatInEntrance = floorAmount * flatsOnFloor;
+        int entranceNum; //номер подъезда
         if ((flatNumber % maxFlatInEntrance) == 0) {
-            numEntrance = flatNumber / maxFlatInEntrance;
+            entranceNum = flatNumber / maxFlatInEntrance;
         } else {
-            numEntrance = flatNumber / maxFlatInEntrance + 1;
+            entranceNum = flatNumber / maxFlatInEntrance + 1;
         }
 
         //определитель этажа
-        int numFloor; //номер этажа
-        int endFlat = flatNumber - (numEntrance - 1) * maxFlatInEntrance;
+        int floorNum; //номер этажа
+        int endFlat = flatNumber - (entranceNum - 1) * maxFlatInEntrance;
         if (endFlat == 0) {
-            if ((flatNumber % 4) == 0) {
-                numFloor = flatNumber / 4;
+            if (flatNumber % flatsOnFloor == 0) {
+                floorNum = flatNumber / flatsOnFloor;
             } else {
-                numFloor = flatNumber / 4 + 1;
+                floorNum = flatNumber / flatsOnFloor + 1;
             }
         } else {
-            if((endFlat % 4) == 0) {
-                numFloor = endFlat / 4;
+            if (endFlat % flatsOnFloor == 0) {
+                floorNum = endFlat / flatsOnFloor;
             } else {
-                numFloor = endFlat / 4 + 1;
+                floorNum = endFlat / flatsOnFloor + 1;
             }
         }
 
         // определитель положения
-        String locateOnFloor = "";
-        int maxNumFlatOnFloor = (numEntrance * maxFlatInEntrance) - ((floorAmount - numFloor) * 4);
-        if (maxNumFlatOnFloor == flatNumber) {
-            locateOnFloor = "справа от лифта, вправо";
-        }
-        if ((maxNumFlatOnFloor - 1) == flatNumber) {
-            locateOnFloor = "справа от лифта, влево";
-        }
-        if ((maxNumFlatOnFloor - 2) == flatNumber) {
-            locateOnFloor = "слева от лифта, вправо";
-        }
-        if ((maxNumFlatOnFloor - 3) == flatNumber) {
-            locateOnFloor = "слева от лифта, влево";
-        }
+        String locateOnFloor = switch (flatNumber % flatsOnFloor) {
+            case 0 -> "справа от лифта, вправо";
+            case 1 -> "слева от лифта, влево";
+            case 2 -> "слева от лифта, вправо";
+            case 3 -> "справа от лифта, влево";
+            default -> "";
+        };
 
-        return flatNumber + " кв - " + numEntrance + " подъезд, " + numFloor + " этаж, " + locateOnFloor;
+        return flatNumber + " кв - " + entranceNum + " подъезд, " + floorNum + " этаж, " + locateOnFloor;
     }
 }
