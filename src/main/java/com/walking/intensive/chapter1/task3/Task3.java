@@ -25,7 +25,6 @@ package com.walking.intensive.chapter1.task3;
  */
 public class Task3 {
     public static void main(String[] args) {
-
         int year = 2025;
         System.out.println(isLeap(year));
     }
