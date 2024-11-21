@@ -27,16 +27,38 @@ public class Task4 {
 //        Для собственных проверок можете делать любые изменения в этом методе
         double a = 0;
         double b = 0;
-        double c = 0;
+        double c = -10;
 
         System.out.println(solveEquation(a, b, c));
-        System.out.println("test");
-
     }
-
     static String solveEquation(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return null; // Заглушка. При реализации - удалить
+        double discriminant;
+        double root;
+        double rootOne;
+        double rootSecond;
+
+        discriminant = (b * b) - 4 * a * c;
+
+        if (a == 0 && b == 0 && c == 0) {
+            return "Бесконечное множество решений.";
+        }
+
+        if (discriminant < 0) {
+            return "Количество решений: 0.";
+        }
+
+        if (discriminant == 0) {
+            root = -b / (2 * a);
+            return "Количество решений: 1. Корень: " + root;
+        }
+
+        if (discriminant > 0) {
+            rootOne = (-b - Math.sqrt(discriminant)) / (2 * a);
+            rootSecond = (-b + Math.sqrt(discriminant)) / (2 * a);
+           return "Количество решений: 2. Корни: " + rootOne + " ," + rootSecond;
+        }
+
+        return null;
     }
 }
