@@ -30,6 +30,7 @@ public class Task4 {
         double c = 0;
 
         System.out.println(solveEquation(a, b, c));
+        System.out.println("test");
 
     }
 
