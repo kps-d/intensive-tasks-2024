@@ -24,13 +24,14 @@ package com.walking.intensive.chapter1.task4;
  */
 public class Task4 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
-        double a = 0;
-        double b = 0;
-        double c = -10;
+
+        double a = -1;
+        double b = 3;
+        double c = 4;
 
         System.out.println(solveEquation(a, b, c));
     }
+
     static String solveEquation(double a, double b, double c) {
 
         double discriminant;
@@ -44,19 +45,26 @@ public class Task4 {
             return "Бесконечное множество решений.";
         }
 
-        if (discriminant < 0) {
+        if (discriminant < 0 || (a + b) == 0) {
             return "Количество решений: 0.";
         }
 
-        if (discriminant == 0) {
+        if (discriminant == 0 || a == 0) {
+            if (a == 0) {
+                root = -c / b;
+                return "Количество решений: 1. Корень: " + root;
+            }
             root = -b / (2 * a);
-            return "Количество решений: 1. Корень: " + root;
+            return "Количество решений: 1. Корень: " + Math.abs(root);
         }
 
         if (discriminant > 0) {
             rootOne = (-b - Math.sqrt(discriminant)) / (2 * a);
             rootSecond = (-b + Math.sqrt(discriminant)) / (2 * a);
-           return "Количество решений: 2. Корни: " + rootOne + " ," + rootSecond;
+            if (rootOne > rootSecond) {
+                return "Количество решений: 2. Корни: " + rootSecond + ";" + rootOne;
+            }
+            return "Количество решений: 2. Корни: " + rootOne + ";" + rootSecond;
         }
 
         return null;
