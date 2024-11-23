@@ -53,21 +53,18 @@ public class Task4 {
         double rootOne;
         double rootSecond;
 
-        if (discriminant > 0) {
-
-            if (a == 0) {
-                return "Количество решений: 1. Корень: " + (-c / b);
-            }
-
-            rootOne = (-b - Math.sqrt(discriminant)) / (2 * a);
-            rootSecond = (-b + Math.sqrt(discriminant)) / (2 * a);
-
-            if (rootOne > rootSecond) {
-                return "Количество решений: 2. Корни: " + rootSecond + ";" + rootOne;
-            }
-            return "Количество решений: 2. Корни: " + rootOne + ";" + rootSecond;
+        if (a == 0) {
+            return "Количество решений: 1. Корень: " + (-c / b);
         }
 
-        return "Ошибка ввода";
+        rootOne = (-b - Math.sqrt(discriminant)) / (2 * a);
+        rootSecond = (-b + Math.sqrt(discriminant)) / (2 * a);
+
+        if (rootOne > rootSecond) {
+            return "Количество решений: 2. Корни: " + rootSecond + ";" + rootOne;
+        }
+
+        return "Количество решений: 2. Корни: " + rootOne + ";" + rootSecond;
+
     }
 }
