@@ -29,14 +29,14 @@ public class Task5 {
      */
     static double getAreaByHeron(double a, double b, double c) {
         //        Место для вашего кода
-        double semiperimetr, triangleArea;
+        double semiperimetr;
         semiperimetr = (a + b + c) / 2;
+
         if (semiperimetr <= a || semiperimetr <= b || semiperimetr <= c) {
             return -1;
         }
-        triangleArea = Math.sqrt(semiperimetr * (semiperimetr - a) * (semiperimetr - b) * (semiperimetr - c));
 
-        return triangleArea;
+        return Math.sqrt(semiperimetr * (semiperimetr - a) * (semiperimetr - b) * (semiperimetr - c));
     }
 
     /**
