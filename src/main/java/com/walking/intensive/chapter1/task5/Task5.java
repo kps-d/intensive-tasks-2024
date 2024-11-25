@@ -10,7 +10,12 @@ package com.walking.intensive.chapter1.task5;
  */
 public class Task5 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+
+        double a = 12;
+        double b = 13;
+        double c = 5;
+
+        System.out.println(getAreaByHeron(a, b, c));
     }
 
     /**
@@ -24,8 +29,14 @@ public class Task5 {
      */
     static double getAreaByHeron(double a, double b, double c) {
         //        Место для вашего кода
+        double semiperimetr, triangleArea;
+        semiperimetr = (a + b + c) / 2;
+        if (semiperimetr <= a || semiperimetr <= b || semiperimetr <= c) {
+            return -1;
+        }
+        triangleArea = Math.sqrt(semiperimetr * (semiperimetr - a) * (semiperimetr - b) * (semiperimetr - c));
 
-        return 0; // Заглушка. При реализации - удалить
+        return triangleArea;
     }
 
     /**
