@@ -1,5 +1,7 @@
 package com.walking.intensive.chapter1.task5;
 
+import java.util.Arrays;
+
 /**
  * Задача поиска площади, величин углов, длин высот, биссектрис, медиан, радиусов вписанной и описанной вокруг
  * треугольника окружностей является центральной в Геометрии.
@@ -11,11 +13,14 @@ package com.walking.intensive.chapter1.task5;
 public class Task5 {
     public static void main(String[] args) {
 
-        double a = 12;
-        double b = 13;
+        double a = 3;
+        double b = 4;
         double c = 5;
 
         System.out.println(getAreaByHeron(a, b, c));
+        System.out.println(Arrays.toString(getHeights(a, b, c)));
+        System.out.println(Arrays.toString(getMedians(a, b, c)));
+
     }
 
     /**
@@ -47,9 +52,20 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getHeights(double a, double b, double c) {
-        //        Место для вашего кода
+        if (getAreaByHeron(a, b, c) == -1) {
+            return new double[0];
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        double heightA = 2 * getAreaByHeron(a, b, c) / a;
+        double heightB = 2 * getAreaByHeron(a, b, c) / b;
+        double heightC = 2 * getAreaByHeron(a, b, c) / c;
+        double[] heightArray = new double[3];
+        heightArray[0] = heightA;
+        heightArray[1] = heightB;
+        heightArray[2] = heightC;
+        Arrays.sort(heightArray);
+
+        return heightArray;
     }
 
     /**
@@ -60,9 +76,20 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getMedians(double a, double b, double c) {
-        //        Место для вашего кода
+        if (getAreaByHeron(a, b, c) == -1) {
+            return new double[0];
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        double medianA = Math.sqrt((2 * b * b) + (2 * c * c) - (a * a)) / 2;
+        double medianB = Math.sqrt((2 * a * a) + (2 * c * c) - (b * b)) / 2;
+        double medianC = Math.sqrt((2 * a * a) + (2 * b * b) - (c * c)) / 2;
+        double[] medianArray = new double[3];
+        medianArray[0] = medianA;
+        medianArray[1] = medianB;
+        medianArray[2] = medianC;
+        Arrays.sort(medianArray);
+
+        return medianArray;
     }
 
     /**
