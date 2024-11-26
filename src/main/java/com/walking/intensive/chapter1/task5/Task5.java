@@ -21,6 +21,7 @@ public class Task5 {
         System.out.println(Arrays.toString(getHeights(a, b, c)));
         System.out.println(Arrays.toString(getMedians(a, b, c)));
         System.out.println(Arrays.toString(getBisectors(a, b, c)));
+        System.out.println(Arrays.toString(getAngles(a, b, c)));
     }
 
     /**
@@ -126,9 +127,20 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getAngles(double a, double b, double c) {
-        //        Место для вашего кода
+        if (getAreaByHeron(a, b, c) == -1) {
+            return new double[0];
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        double anglesA = Math.toDegrees(Math.cos((b * b + c * c - a * a) / (2 * b * c)));
+        double anglesC = Math.toDegrees(Math.cos((b * b + a * a - c * c) / (2 * a * b)));
+        double anglesB = 180 - (anglesA + anglesC);
+        double[] anglesArray = new double[3];
+        anglesArray[0] = anglesA;
+        anglesArray[1] = anglesB;
+        anglesArray[2] = anglesC;
+        Arrays.sort(anglesArray);
+
+        return anglesArray;
     }
 
     /**
