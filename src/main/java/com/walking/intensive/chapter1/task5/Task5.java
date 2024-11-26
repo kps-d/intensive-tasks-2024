@@ -22,6 +22,8 @@ public class Task5 {
         System.out.println(Arrays.toString(getMedians(a, b, c)));
         System.out.println(Arrays.toString(getBisectors(a, b, c)));
         System.out.println(Arrays.toString(getAngles(a, b, c)));
+        System.out.println(getInscribedCircleRadius(a, b, c));
+        System.out.println(getCircumradius(a, b, c));
     }
 
     /**
@@ -131,9 +133,9 @@ public class Task5 {
             return new double[0];
         }
 
-        double anglesA = Math.toDegrees(Math.cos((b * b + c * c - a * a) / (2 * b * c)));
-        double anglesC = Math.toDegrees(Math.cos((b * b + a * a - c * c) / (2 * a * b)));
-        double anglesB = 180 - (anglesA + anglesC);
+        double anglesA = Math.toDegrees(Math.acos((a * a + c * c - b * b) / (2 * a * c)));
+        double anglesB = Math.toDegrees(Math.acos((a * a + b * b - c * c) / (2 * a * b)));
+        double anglesC = Math.toDegrees(Math.acos((b * b + c * c - a * a) / (2 * c * b)));
         double[] anglesArray = new double[3];
         anglesArray[0] = anglesA;
         anglesArray[1] = anglesB;
@@ -151,9 +153,8 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getInscribedCircleRadius(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return 0; // Заглушка. При реализации - удалить
+        return getAreaByHeron(a, b, c) == -1 ? -1 : getAreaByHeron(a, b, c) / ((a + b + c) / 2);
     }
 
     /**
@@ -164,9 +165,8 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getCircumradius(double a, double b, double c) {
-        //        Место для вашего кода
 
-        return 0; // Заглушка. При реализации - удалить
+        return getAreaByHeron(a, b, c) == -1 ? -1 : (a * b * c) / (4 * getAreaByHeron(a, b, c));
     }
 
     /**
