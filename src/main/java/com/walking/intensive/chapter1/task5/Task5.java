@@ -20,7 +20,7 @@ public class Task5 {
         System.out.println(getAreaByHeron(a, b, c));
         System.out.println(Arrays.toString(getHeights(a, b, c)));
         System.out.println(Arrays.toString(getMedians(a, b, c)));
-
+        System.out.println(Arrays.toString(getBisectors(a, b, c)));
     }
 
     /**
@@ -33,7 +33,6 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getAreaByHeron(double a, double b, double c) {
-        //        Место для вашего кода
         double semiperimetr;
         semiperimetr = (a + b + c) / 2;
 
@@ -100,9 +99,23 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getBisectors(double a, double b, double c) {
-        //        Место для вашего кода
+        if (getAreaByHeron(a, b, c) == -1) {
+            return new double[0];
+        }
 
-        return null; // Заглушка. При реализации - удалить
+        double semiperimetr;
+        semiperimetr = (a + b + c) / 2;
+
+        double bisectorA = 2 * Math.sqrt(semiperimetr * (semiperimetr - a) * b * c) / (b + c);
+        double bisectorB = 2 * Math.sqrt(semiperimetr * (semiperimetr - b) * a * c) / (a + c);
+        double bisectorC = 2 * Math.sqrt(semiperimetr * (semiperimetr - c) * a * b) / (a + b);
+        double[] bisectorArray = new double[3];
+        bisectorArray[0] = bisectorA;
+        bisectorArray[1] = bisectorB;
+        bisectorArray[2] = bisectorC;
+        Arrays.sort(bisectorArray);
+
+        return bisectorArray;
     }
 
     /**
