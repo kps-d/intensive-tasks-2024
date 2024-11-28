@@ -13,6 +13,7 @@ public class Task6 {
 
         System.out.println(getLcm(m, n));
         System.out.println(getGcd(m, n));
+        System.out.println(getGcdByEuclideanAlgorithm(m, n));
     }
 
     /**
@@ -30,7 +31,7 @@ public class Task6 {
 
         int numLcm = 0;
 
-        while(numLcm >= 0) {
+        while (numLcm >= 0) {
             numLcm = numLcm + 1;
 
             if (numLcm % m == 0) {
@@ -60,7 +61,7 @@ public class Task6 {
             return -1;
         }
 
-        return (m * n) / numLcm ;
+        return (m * n) / numLcm;
     }
 
     /**
@@ -78,16 +79,23 @@ public class Task6 {
             return -1;
         }
 
-        return 0;
+        return getGcdByRecurs(m, n);
     }
 
     static int getGcdByRecurs(int m, int n) {
 
-        if ((m != 0) && (n != 0)) {
+        if ((m == 0) || (n == 0)) {
             return m + n;
         }
 
+        if (m > n) {
+            m = m % n;
+            return getGcdByRecurs(m, n);
+        }
 
-        return 0;
+        n = n % m;
+
+        return getGcdByRecurs(m, n);
+
     }
 }
