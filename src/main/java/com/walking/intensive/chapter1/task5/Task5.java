@@ -36,14 +36,14 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getAreaByHeron(double a, double b, double c) {
-        double semiperimetr;
-        semiperimetr = (a + b + c) / 2;
 
-        if (semiperimetr <= a || semiperimetr <= b || semiperimetr <= c) {
+        if (isParametersValid(a, b, c)) {
             return -1;
         }
 
-        return Math.sqrt(semiperimetr * (semiperimetr - a) * (semiperimetr - b) * (semiperimetr - c));
+        double halfPerimeter = getHalfPerimeter(a, b, c);
+
+        return Math.sqrt(halfPerimeter * (halfPerimeter - a) * (halfPerimeter - b) * (halfPerimeter - c));
     }
 
     /**
@@ -54,7 +54,7 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getHeights(double a, double b, double c) {
-        if (getAreaByHeron(a, b, c) == -1) {
+        if (isParametersValid(a, b, c)) {
             return new double[0];
         }
 
@@ -78,7 +78,7 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getMedians(double a, double b, double c) {
-        if (getAreaByHeron(a, b, c) == -1) {
+        if (isParametersValid(a, b, c)) {
             return new double[0];
         }
 
@@ -102,7 +102,7 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getBisectors(double a, double b, double c) {
-        if (getAreaByHeron(a, b, c) == -1) {
+        if (isParametersValid(a, b, c)) {
             return new double[0];
         }
 
@@ -129,7 +129,7 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getAngles(double a, double b, double c) {
-        if (getAreaByHeron(a, b, c) == -1) {
+        if (isParametersValid(a, b, c)) {
             return new double[0];
         }
 
@@ -154,7 +154,11 @@ public class Task5 {
      */
     static double getInscribedCircleRadius(double a, double b, double c) {
 
-        return getAreaByHeron(a, b, c) == -1 ? -1 : getAreaByHeron(a, b, c) / ((a + b + c) / 2);
+        if (isParametersValid(a, b, c)) {
+            return -1;
+        }
+
+        return getAreaByHeron(a, b, c) / getHalfPerimeter(a, b, c);
     }
 
     /**
@@ -166,7 +170,11 @@ public class Task5 {
      */
     static double getCircumradius(double a, double b, double c) {
 
-        return getAreaByHeron(a, b, c) == -1 ? -1 : (a * b * c) / (4 * getAreaByHeron(a, b, c));
+        if (isParametersValid(a, b, c)) {
+            return -1;
+        }
+
+        return (a * b * c) / (4 * getAreaByHeron(a, b, c));
     }
 
     /**
@@ -187,5 +195,19 @@ public class Task5 {
         //        Место для вашего кода
 
         return 0; // Заглушка. При реализации - удалить
+    }
+
+    static boolean isParametersValid (double a, double b, double c){
+        double halfPerimeter = getHalfPerimeter(a, b, c);
+
+        if (halfPerimeter <= a || halfPerimeter <= b || halfPerimeter <= c) {
+            return false;
+        }
+
+        return true;
+    }
+
+    static double getHalfPerimeter (double a, double b, double c) {
+        return  (a + b + c) / 2;
     }
 }
