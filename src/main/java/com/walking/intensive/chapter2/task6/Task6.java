@@ -8,7 +8,11 @@ package com.walking.intensive.chapter2.task6;
  */
 public class Task6 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        int m = 15;
+        int n = 25;
+
+        System.out.println(getLcm(m, n));
+        System.out.println(getGcd(m, n));
     }
 
     /**
@@ -19,8 +23,27 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getLcm(int m, int n) {
-        // Ваш код
-        return 0;
+
+        if (m <= 0 || n <= 0) {
+            return -1;
+        }
+
+        int numLcm = 0;
+
+        while(numLcm >= 0) {
+            numLcm = numLcm + 1;
+
+            if (numLcm % m == 0) {
+
+                if (numLcm % n == 0) {
+                    break;
+                }
+
+            }
+
+        }
+
+        return numLcm;
     }
 
     /**
@@ -31,8 +54,13 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcd(int m, int n) {
-        // Ваш код
-        return 0;
+        int numLcm = getLcm(m, n);
+
+        if (numLcm == -1) {
+            return -1;
+        }
+
+        return (m * n) / numLcm ;
     }
 
     /**
@@ -44,7 +72,22 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        // Ваш код
+        int numLcm = getLcm(m, n);
+
+        if (numLcm == -1) {
+            return -1;
+        }
+
+        return 0;
+    }
+
+    static int getGcdByRecurs(int m, int n) {
+
+        if ((m != 0) && (n != 0)) {
+            return m + n;
+        }
+
+
         return 0;
     }
 }
