@@ -54,20 +54,18 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getHeights(double a, double b, double c) {
+
         if (isParametersValid(a, b, c)) {
             return new double[0];
         }
 
-        double heightA = 2 * getAreaByHeron(a, b, c) / a;
-        double heightB = 2 * getAreaByHeron(a, b, c) / b;
-        double heightC = 2 * getAreaByHeron(a, b, c) / c;
-        double[] heightArray = new double[3];
-        heightArray[0] = heightA;
-        heightArray[1] = heightB;
-        heightArray[2] = heightC;
-        Arrays.sort(heightArray);
+        double[] heights = new double[3];
+        heights[0] = 2 * getAreaByHeron(a, b, c) / a;
+        heights[1] = 2 * getAreaByHeron(a, b, c) / b;
+        heights[2] = 2 * getAreaByHeron(a, b, c) / c;
+        Arrays.sort(heights);
 
-        return heightArray;
+        return heights;
     }
 
     /**
@@ -78,20 +76,18 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getMedians(double a, double b, double c) {
+
         if (isParametersValid(a, b, c)) {
             return new double[0];
         }
 
-        double medianA = Math.sqrt((2 * b * b) + (2 * c * c) - (a * a)) / 2;
-        double medianB = Math.sqrt((2 * a * a) + (2 * c * c) - (b * b)) / 2;
-        double medianC = Math.sqrt((2 * a * a) + (2 * b * b) - (c * c)) / 2;
-        double[] medianArray = new double[3];
-        medianArray[0] = medianA;
-        medianArray[1] = medianB;
-        medianArray[2] = medianC;
-        Arrays.sort(medianArray);
+        double[] medians = new double[3];
+        medians[0] = Math.sqrt((2 * b * b) + (2 * c * c) - (a * a)) / 2;
+        medians[1] = Math.sqrt((2 * a * a) + (2 * c * c) - (b * b)) / 2;
+        medians[2] = Math.sqrt((2 * a * a) + (2 * b * b) - (c * c)) / 2;
+        Arrays.sort(medians);
 
-        return medianArray;
+        return medians;
     }
 
     /**
@@ -102,23 +98,20 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getBisectors(double a, double b, double c) {
+
         if (isParametersValid(a, b, c)) {
             return new double[0];
         }
 
-        double semiperimetr;
-        semiperimetr = (a + b + c) / 2;
+        double halfPerimeter = getHalfPerimeter(a, b, c);
 
-        double bisectorA = 2 * Math.sqrt(semiperimetr * (semiperimetr - a) * b * c) / (b + c);
-        double bisectorB = 2 * Math.sqrt(semiperimetr * (semiperimetr - b) * a * c) / (a + c);
-        double bisectorC = 2 * Math.sqrt(semiperimetr * (semiperimetr - c) * a * b) / (a + b);
-        double[] bisectorArray = new double[3];
-        bisectorArray[0] = bisectorA;
-        bisectorArray[1] = bisectorB;
-        bisectorArray[2] = bisectorC;
-        Arrays.sort(bisectorArray);
+        double[] bisectors = new double[3];
+        bisectors[0] = 2 * Math.sqrt(halfPerimeter * (halfPerimeter - a) * b * c) / (b + c);
+        bisectors[1] = 2 * Math.sqrt(halfPerimeter * (halfPerimeter - b) * a * c) / (a + c);
+        bisectors[2] = 2 * Math.sqrt(halfPerimeter * (halfPerimeter - c) * a * b) / (a + b);
+        Arrays.sort(bisectors);
 
-        return bisectorArray;
+        return bisectors;
     }
 
     /**
@@ -129,20 +122,18 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getAngles(double a, double b, double c) {
+
         if (isParametersValid(a, b, c)) {
             return new double[0];
         }
 
-        double anglesA = Math.toDegrees(Math.acos((a * a + c * c - b * b) / (2 * a * c)));
-        double anglesB = Math.toDegrees(Math.acos((a * a + b * b - c * c) / (2 * a * b)));
-        double anglesC = Math.toDegrees(Math.acos((b * b + c * c - a * a) / (2 * c * b)));
-        double[] anglesArray = new double[3];
-        anglesArray[0] = anglesA;
-        anglesArray[1] = anglesB;
-        anglesArray[2] = anglesC;
-        Arrays.sort(anglesArray);
+        double[] angles = new double[3];
+        angles[0] = Math.toDegrees(Math.acos((a * a + c * c - b * b) / (2 * a * c)));
+        angles[1] = Math.toDegrees(Math.acos((a * a + b * b - c * c) / (2 * a * b)));
+        angles[2] = Math.toDegrees(Math.acos((b * b + c * c - a * a) / (2 * c * b)));
+        Arrays.sort(angles);
 
-        return anglesArray;
+        return angles;
     }
 
     /**
@@ -174,7 +165,7 @@ public class Task5 {
             return -1;
         }
 
-        return (a * b * c) / (4 * getAreaByHeron(a, b, c));
+        return a * b * c / (4 * getAreaByHeron(a, b, c));
     }
 
     /**
@@ -197,17 +188,14 @@ public class Task5 {
         return 0; // Заглушка. При реализации - удалить
     }
 
-    static boolean isParametersValid (double a, double b, double c){
+    static boolean isParametersValid(double a, double b, double c) {
         double halfPerimeter = getHalfPerimeter(a, b, c);
 
-        if (halfPerimeter <= a || halfPerimeter <= b || halfPerimeter <= c) {
-            return false;
-        }
-
-        return true;
+        return halfPerimeter <= a || halfPerimeter <= b || halfPerimeter <= c;
     }
 
-    static double getHalfPerimeter (double a, double b, double c) {
-        return  (a + b + c) / 2;
+    static double getHalfPerimeter(double a, double b, double c) {
+
+        return (a + b + c) / 2;
     }
 }
