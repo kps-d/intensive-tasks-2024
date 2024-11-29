@@ -25,7 +25,7 @@ public class Task6 {
      */
     static int getLcm(int m, int n) {
 
-        if (m <= 0 || n <= 0) {
+        if (isValid(m, n)) {
             return -1;
         }
 
@@ -34,15 +34,11 @@ public class Task6 {
         while (numLcm >= 0) {
             numLcm = numLcm + 1;
 
-            if (numLcm % m == 0) {
-
-                if (numLcm % n == 0) {
+            if (numLcm % m == 0 && numLcm % n == 0) {
                     break;
                 }
 
             }
-
-        }
 
         return numLcm;
     }
@@ -55,13 +51,12 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcd(int m, int n) {
-        int numLcm = getLcm(m, n);
 
-        if (numLcm == -1) {
+        if (isValid(m, n)) {
             return -1;
         }
 
-        return (m * n) / numLcm;
+        return (m * n) / getLcm(m, n);
     }
 
     /**
@@ -73,9 +68,8 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        int numLcm = getLcm(m, n);
 
-        if (numLcm == -1) {
+        if (isValid(m, n)) {
             return -1;
         }
 
@@ -96,6 +90,9 @@ public class Task6 {
         n = n % m;
 
         return getGcdByRecurs(m, n);
+    }
 
+    static boolean isValid (int m, int n) {
+        return m <= 0 || n <= 0;
     }
 }
