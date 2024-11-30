@@ -27,6 +27,12 @@ package com.walking.intensive.chapter2.task7;
  */
 public class Task7 {
     public static void main(String[] args) {
+        int n = 285;
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <+ n; j++) {
+                System.out.println(i + " " + j);
+            }
+        }
 //        Для собственных проверок можете делать любые изменения в этом методе
     }
 
