@@ -27,13 +27,34 @@ package com.walking.intensive.chapter2.task7;
  */
 public class Task7 {
     public static void main(String[] args) {
-        int n = 285;
-        for (int i = 1; i <= n; i++) {
-            for (int j = 1; j <+ n; j++) {
-                System.out.println(i + " " + j);
+        int n = 1_000;
+        int sumDividerFirst = 0;
+        int sumDividerSecond = 0;
+        for (int j = n; j >= 1; j--) {
+            sumDividerFirst = 0;
+            for (int i = j - 1; i >= 1; i--) {
+
+                if (j % i == 0) {
+                    sumDividerFirst += i;
+                }
+
+            }
+            if (sumDividerFirst == j) {
+                for (int k = sumDividerFirst; k >= 1; k--) {
+
+                    if (sumDividerFirst % k == 0) {
+                        sumDividerSecond += k;
+                    }
+
+                }
+            }
+            if (sumDividerFirst == sumDividerSecond) {
+                System.out.println(sumDividerFirst + " " + sumDividerSecond);
+                break;
             }
         }
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(sumDividerFirst);
+        System.out.println(sumDividerSecond);
     }
 
     static int getFriendlyPair(int n) {
