@@ -27,11 +27,18 @@ package com.walking.intensive.chapter2.task7;
  */
 public class Task7 {
     public static void main(String[] args) {
-        int n = 1_000;
-        int sumDividerFirst = 0;
-        int sumDividerSecond = 0;
-        for (int j = n; j >= 1; j--) {
-            sumDividerFirst = 0;
+        int num = 1_000_001;
+        System.out.println(getFriendlyPair(num));
+    }
+
+    static int getFriendlyPair(int num) {
+
+        if (isValid(num)) {
+            return -1;
+        }
+
+        for (int j = num; j >= 1; j--) {
+            int sumDividerFirst = 0;
             for (int i = j - 1; i >= 1; i--) {
 
                 if (j % i == 0) {
@@ -39,26 +46,24 @@ public class Task7 {
                 }
 
             }
-            if (sumDividerFirst == j) {
-                for (int k = sumDividerFirst; k >= 1; k--) {
+            int sumDividerSecond = 0;
+            for (int n = sumDividerFirst - 1; n >= 1; n--) {
 
-                    if (sumDividerFirst % k == 0) {
-                        sumDividerSecond += k;
-                    }
-
+                if (sumDividerFirst % n == 0) {
+                    sumDividerSecond += n;
                 }
+
             }
-            if (sumDividerFirst == sumDividerSecond) {
-                System.out.println(sumDividerFirst + " " + sumDividerSecond);
-                break;
+
+            if (j == sumDividerSecond && sumDividerFirst != sumDividerSecond) {
+                return j;
             }
+
         }
-        System.out.println(sumDividerFirst);
-        System.out.println(sumDividerSecond);
+        return 0;
     }
 
-    static int getFriendlyPair(int n) {
-        // Ваш код
-        return 0;
+    static boolean isValid(int num) {
+        return num <= 0 || num > 1_000_000;
     }
 }
