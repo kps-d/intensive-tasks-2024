@@ -27,8 +27,6 @@ public class Task8 {
 
         int countHappySum = 0;
         int countTimes = 0;
-        int sumLeftPart;
-        int sumRightPart;
         for (int j = 0; j <= 9; j++) {
             for (int i = 0; i <= 9; i++) {
                 for (int k = 0; k <= 9; k++) {
@@ -36,10 +34,7 @@ public class Task8 {
                         for (int t = 0; t <= 9; t++) {
                             for (int m = 0; m <= 9; m++) {
 
-                                sumLeftPart = j + i + k;
-                                sumRightPart = n + t + m;
-
-                                if (sumLeftPart == sumRightPart) {
+                                if ((j + i + k) == (n + t + m)) {
                                     countHappySum += 1;
                                 }
 
