@@ -37,26 +37,12 @@ public class Task7 {
             return -1;
         }
 
-        for (int j = num; j >= 1; j--) {
-            int sumDividerFirst = 0;
-            for (int i = j - 1; i >= 1; i--) {
+        for (int i = num; i >= 1; i--) {
+            int sumDividerFirst = getSumDivider(i);
+            int sumDividerSecond = getSumDivider(sumDividerFirst);
 
-                if (j % i == 0) {
-                    sumDividerFirst += i;
-                }
-
-            }
-            int sumDividerSecond = 0;
-            for (int n = sumDividerFirst - 1; n >= 1; n--) {
-
-                if (sumDividerFirst % n == 0) {
-                    sumDividerSecond += n;
-                }
-
-            }
-
-            if (j == sumDividerSecond && sumDividerFirst != sumDividerSecond) {
-                return j;
+            if (i == sumDividerSecond && sumDividerFirst != sumDividerSecond) {
+                return i;
             }
 
         }
@@ -65,5 +51,17 @@ public class Task7 {
 
     static boolean isValid(int num) {
         return num <= 0 || num > 1_000_000;
+    }
+
+    static int getSumDivider(int num) {
+        int sumDivider = 0;
+        for (int i = num - 1; i >= 1; i--) {
+
+            if (num % i == 0) {
+                sumDivider += i;
+            }
+
+        }
+        return sumDivider;
     }
 }
