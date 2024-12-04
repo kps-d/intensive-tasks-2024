@@ -51,7 +51,17 @@ package com.walking.intensive.chapter2.task9;
  */
 public class Task9 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        int n = 5;
+        for (int i = n; i >= 1; i--) {
+            for (int j = 1; j <= n + n - 1; j++) {
+                if (j < i) {
+                    System.out.print(" ");
+                    continue;
+                }
+                System.out.print("*");
+            }
+            System.out.println();
+        }
     }
 
     static String getPascalTriangle(int n) {
