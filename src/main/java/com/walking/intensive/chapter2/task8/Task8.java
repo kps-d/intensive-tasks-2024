@@ -32,10 +32,11 @@ public class Task8 {
         for (int j = 0; j <= 9; j++) {
             for (int i = 0; i <= 9; i++) {
                 for (int k = 0; k <= 9; k++) {
-                    sumLeftPart = j + i + k;
                     for (int n = 0; n <= 9; n++) {
                         for (int t = 0; t <= 9; t++) {
                             for (int m = 0; m <= 9; m++) {
+
+                                sumLeftPart = j + i + k;
                                 sumRightPart = n + t + m;
 
                                 if (sumLeftPart == sumRightPart) {
