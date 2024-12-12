@@ -51,7 +51,7 @@ package com.walking.intensive.chapter2.task9;
  */
 public class Task9 {
     public static void main(String[] args) {
-        int n = 3;
+        int n = 15;
         System.out.println(getPascalTriangle(n));
     }
 
@@ -65,7 +65,6 @@ public class Task9 {
         for (int i = n; i >= 1; i--) {
             int count = 0;
             for (int j = 1; j <= n + n - 1; j++) {
-
                 if (j < i || j > n + n - i || (j - i) % 2 != 0) {
                     trianglePascal = trianglePascal + " ";
                     continue;
@@ -82,12 +81,7 @@ public class Task9 {
     }
 
     static long getFactorial(int f) {
-
-        if (f <= 1) {
-            return 1;
-        }
-
-        return f * getFactorial(f - 1);
+        return f <= 1 ? 1 : f * getFactorial(f - 1);
     }
 
     static boolean isValid(int n) {
