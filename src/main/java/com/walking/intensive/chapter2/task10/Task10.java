@@ -14,8 +14,7 @@ import java.util.Objects;
  */
 public class Task10 {
     public static void main(String[] args) {
-        System.out.println(isPalindrome(""));
-
+        System.out.println(isPalindrome("Дорог Рим город или дорог Миргород?!"));
     }
 
     static boolean isPalindrome(String inputString) {
@@ -24,23 +23,29 @@ public class Task10 {
             return false;
         }
 
-        String s = inputString.toLowerCase();
-        String sTest = "";
-        String sForward = "";
+        String lowerCaseString = inputString.toLowerCase();
+        int lengthSting = lowerCaseString.length();
+        int j = lengthSting - 1;
 
-        for (int i = 0; i < s.length(); i++) {
-            if (!isPunctuation(s.charAt(i))) {
-                sTest = sTest + s.charAt(i);
+        for (int i = 0; i < lengthSting; i++) {
+            if (isPunctuation(lowerCaseString.charAt(i))) {
+                continue;
             }
+
+            for (; j >= 0; j--) {
+                if (isPunctuation(lowerCaseString.charAt(j))) {
+                    continue;
+                }
+
+                if (lowerCaseString.charAt(i) != lowerCaseString.charAt(j)) {
+                    return false;
+                }
+                break;
+            }
+            j--;
         }
 
-        for (int j = s.length() - 1; j >= 0; j--) {
-            if (!isPunctuation(s.charAt(j))) {
-                sForward = sForward + s.charAt(j);
-            }
-        }
-
-        return sTest.equals(sForward);
+        return true;
     }
 
     static boolean isPunctuation(char c) {
@@ -51,15 +56,14 @@ public class Task10 {
             if (c == testS) {
                 return false;
             }
-
         }
+
         return true;
     }
 
-    static boolean isValid(String s) {
-        return s == null || s.length() <= 1;
+    static boolean isValid(String inputString) {
+        return inputString == null || inputString.length() <= 1;
     }
-
 }
 
 
