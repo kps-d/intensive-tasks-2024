@@ -3,6 +3,9 @@ package com.walking.intensive.chapter2.task10;
 import java.util.Locale;
 import java.util.Objects;
 
+import static java.lang.Character.isLetter;
+
+
 /**
  * Реализуйте метод isPalindrome(), который проверяет, является ли строка палиндромом.
  *
@@ -23,23 +26,23 @@ public class Task10 {
             return false;
         }
 
-        String lowerCaseString = inputString.toLowerCase();
-        int lengthSting = lowerCaseString.length();
-        int j = lengthSting - 1;
+        int lengthString = inputString.length();
+        int j = lengthString - 1;
 
-        for (int i = 0; i < lengthSting; i++) {
-            if (isPunctuation(lowerCaseString.charAt(i))) {
+        for (int i = 0; i < lengthString / 2; i++) {
+            if (isPunctuation(inputString.charAt(i))) {
                 continue;
             }
 
             for (; j >= 0; j--) {
-                if (isPunctuation(lowerCaseString.charAt(j))) {
+                if (isPunctuation(inputString.charAt(j))) {
                     continue;
                 }
 
-                if (lowerCaseString.charAt(i) != lowerCaseString.charAt(j)) {
+                if (!Character.toString(inputString.charAt(i)).equalsIgnoreCase(Character.toString(inputString.charAt(j)))) {
                     return false;
                 }
+
                 break;
             }
             j--;
@@ -49,18 +52,8 @@ public class Task10 {
     }
 
     static boolean isPunctuation(char c) {
-        String abc = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
-        for (int i = 0; i < abc.length(); i++) {
-            char testS = abc.charAt(i);
-
-            if (c == testS) {
-                return false;
-            }
-        }
-
-        return true;
+        return !isLetter(c);
     }
-
     static boolean isValid(String inputString) {
         return inputString == null || inputString.length() <= 1;
     }
